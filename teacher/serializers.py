@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 
 
 from .models import Teacher
-from school.settings import EMAIL_HOST_USER
+from config.settings import EMAIL_HOST_USER
 
 
 User = get_user_model()
