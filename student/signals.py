@@ -24,3 +24,12 @@ def post_save_student(created, **kwargs):
         send_register_mail(instance.email, instance.full_name)
     else:
         pass
+
+
+def send_spam_mail(email, full_name, text):
+    send_mail(
+        f"Здравствуйте {full_name.title()}",
+        text,
+        EMAIL_HOST_USER,
+        [email]
+    )

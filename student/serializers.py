@@ -11,6 +11,11 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SpamSerializer(serializers.Serializer):
+    text = serializers.CharField()
+
+    
+
 
 ###Можно и без сигнала обойтись
 
