@@ -91,6 +91,7 @@ DATABASES = {
         'NAME': config('BN'),
         'USER': config('U'),
         'PASSWORD': config('P'),
+        'HOST':'db',
         
     }
 }

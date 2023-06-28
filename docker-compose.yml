@@ -1,0 +1,33 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    links:
+      - db:db
+    container_name: heritageapi_web_1
+    depends_on:
+      - db
+    networks:
+      - heritage-network
+
+  db:
+    image: postgres:13.3
+    container_name: db
+    restart: always
+    networks:
+      - heritage-network
+    environment:
+      POSTGRES_DATABASE: school
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 1
+    volumes:
+      - .dbdata:/var/lib/postgres
+    ports:
+      - "32768:5432"
+
+networks:
+  heritage-network:
+    driver: bridge
