@@ -3,16 +3,7 @@ from django.db import models
 
 from group.models import Group
 
-'''
-ФИО
-Mail
-Дата рождения
-Класс
-Адрес
-Пол
-Фото(необязательно)
 
-'''
 class Student(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='Ф.И.О')
     email = models.EmailField(max_length=100, unique=True, verbose_name='Эл.почта')
