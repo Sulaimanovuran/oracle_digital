@@ -8,20 +8,19 @@ services:
       - ./config:/config
     environment:
       - DB_HOST=database
-      - DB_NAME=test
-      - DB_USER=uran
-      - DB_PASS=1
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
 
     command: >
       sh -c "python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       - database
-    links:
-      - database:database
+
 
   database:
     image: postgres:14.6-alpine
     environment:
-      - POSTGRES_DB=test
-      - POSTGRES_USER=uran
-      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
