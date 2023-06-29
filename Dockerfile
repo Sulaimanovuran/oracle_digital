@@ -1,19 +1,19 @@
-#Pull base image.
+#Скачиваем базовый образ
 FROM python:3.9.5-slim
 
-#Usefull to get logs
+#Логгируем
 ENV PYTHONUNBUFFERED 1
 
-#Make local dir
+#Создаем локальную директорию
 RUN mkdir -p /app
 
-#set as the working directory
+#Делаем ее рабочей директорией
 WORKDIR /app
 
 #https://luis-sena.medium.com/creating-the-perfect-python-dockerfile-51bdec41f1c8
 COPY requirements.txt .
 
-#now copy all the files in this directory to \code
+#Копируем все файлы в этк директорию
 ADD . .
 
 #https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
