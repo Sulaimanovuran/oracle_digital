@@ -1,33 +1,26 @@
 services:
-  web:
-    build: .
+  web-app:
+    build: 
+      context: .
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
-    links:
-      - db:db
-    container_name: heritageapi_web_1
-    depends_on:
-      - db
-    networks:
-      - heritage-network
-
-  db:
-    image: postgres:13.3
-    container_name: db
-    restart: always
-    networks:
-      - heritage-network
+      - ./config:/config
     environment:
-      POSTGRES_DATABASE: school
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: 1
-    volumes:
-      - .dbdata:/var/lib/postgres
-    ports:
-      - "32768:5432"
+      - DB_HOST=database
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
 
-networks:
-  heritage-network:
-    driver: bridge
+    command: >
+      sh -c "python3 manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - database
+
+
+  database:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}

@@ -17,13 +17,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
 
 from django.conf import settings
 
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title='Система автоматизации бизнес процессов',
+        default_version='1',
+        description='Terms of Reference from Oracle Digital'
+    ),
+    public=True
+)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('swagger/', schema_view.with_ui('swagger')),
     path('teacher/', include('teacher.urls')),
     path('student/', include('student.urls')),
     path('school/', include('school.urls')),
